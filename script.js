@@ -8,11 +8,20 @@ function getComputerChoice() {
    let number = Math.floor(Math.random() * 100) + 1;
    return number;
 }
+function convertRockPaperScissors(number) {
+    if (number > 66) {
+        return 'scissors';
+    } else if (number <= 66 && number > 33) {
+        return 'rock';
+    } else if (number <= 33 && number > 0) {
+        return 'paper';
+    }
+}
 
 //round consists of getting user input
 function getHumanChoice() {
-    let number = prompt('pick a number');
-    return parseInt(number);
+    let string = prompt('pick either Rock, Paper, or Scissors');
+    return tolowerCase(string);
 }
 
 // then matching the two together
