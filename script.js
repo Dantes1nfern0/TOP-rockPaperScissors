@@ -34,17 +34,17 @@ function getComputerChoice() {
 // Return user input
 function getHumanChoice() {
     // Prompt for human to enter 'rock', 'paper', or 'scissors' and assign to userInput
-    userInput.toLowerCase() = prompt('Please enter \'Rock\', \'Paper\', or \'Scissors\'')
+    userInput = prompt('Please enter \'Rock\', \'Paper\', or \'Scissors\'')
     // IF user inputs wrong invalid string:
-    if (userInput === 'rock' || 
-    userInput === 'paper' || 
-    userInput === 'scissors') {
+    if (userInput.toLowerCase() === 'rock' || 
+    userInput.toLowerCase() === 'paper' || 
+    userInput.toLowerCase() === 'scissors') {
         // Cancel and return 'Invalid Input'
-        return userInput;
+        return userInput.toLowerCase();
     }
     // ELSE IF user inputs valid string:
     else {
-        return ('Cancelled: Invalid input.');
+        return alert('Cancelled: Invalid input.');
     }
         // RETURN user's input
 }
@@ -76,7 +76,7 @@ function playRound(humanChoice, computerChoice) {
         }
     } 
     if (humanChoice === computerChoice) {
-        return 'It\'s tie!';
+        return alert('It\'s tie!');
     }
 }
 
@@ -85,4 +85,5 @@ const computerSelection = getComputerChoice();
 
 playRound(humanSelection, computerSelection);
 
-console.log(playRound);
+console.log(humanScore);
+console.log(computerScore);
