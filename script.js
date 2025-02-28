@@ -1,4 +1,3 @@
-// Two variables in global scope to keep track of human and computer scores
 let humanScore = 0;
 let computerScore = 0;
 
@@ -44,7 +43,7 @@ function getHumanChoice() {
     }
     // ELSE IF user inputs valid string:
     else {
-        return alert('Cancelled: Invalid input.');
+        return console.log('Cancelled: Invalid input.');
     }
         // RETURN user's input
 }
@@ -76,14 +75,18 @@ function playRound(humanChoice, computerChoice) {
         }
     } 
     if (humanChoice === computerChoice) {
-        return alert('It\'s tie!');
+        return console.log('It\'s tie!');
     }
 }
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
+function playGame() {
+    playRound(humanSelection, computerSelection);
+    console.log(humanScore);
+    console.log(computerScore);
+}
 
-console.log(humanScore);
-console.log(computerScore);
+playRound(humanSelection, computerSelection);
+playGame();
