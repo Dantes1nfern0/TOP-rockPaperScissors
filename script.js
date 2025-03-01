@@ -1,9 +1,9 @@
 // keeping score
-let humanScore = 0;
-let computerScore = 0;
 let roundNumber = 1;
 let computerChoice = '';
 let humanChoice = '';
+let humanScore = 0;
+let computerScore = 0;
 
 // then computer input
 function convertRockPaperScissors(number) {
@@ -79,7 +79,7 @@ function playRound(computer, human) {
     }
 }
 
-function playFiveRounds() {
+function playGame() {
     console.log(playRound(getComputerChoice(), getHumanChoice()));
     console.log(playRound(getComputerChoice(), getHumanChoice()));
     console.log(playRound(getComputerChoice(), getHumanChoice()));
@@ -93,7 +93,7 @@ function playFiveRounds() {
     )
 }
 
-playFiveRounds();
+playGame();
 
 
 
