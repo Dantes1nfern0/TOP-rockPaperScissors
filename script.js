@@ -24,8 +24,15 @@ function getComputerChoice() {
 //round consists of getting user input
 function getHumanChoice() {
     let string = prompt('pick either Rock, Paper, or Scissors');
+    if (string.toLowerCase() == 'rock' ||
+    string.toLowerCase() == 'paper' ||
+    string.toLowerCase() == 'scissors') {
         return string.toLowerCase();
-}
+    } else {
+        return (0);
+    }
+
+    }
 
 // then matching the two together
 function determine(computer, human) {
@@ -57,11 +64,19 @@ function logicRockPaperScissors(computer, human) {
 
 // outputting the result
 function playRound(computer, human) {
-    return( 
-        console.log(('Round ' + roundNumber)),
-        console.log(logicRockPaperScissors(computer, human)),
-        roundNumber++
-    )
+    if (
+    human != 'rock' &&
+    human != 'paper' &&
+    human != 'scissors'
+    ) {
+        return ('Invalid syntax');
+    } else {
+        return( 
+            console.log(('Round ' + roundNumber)),
+            console.log(logicRockPaperScissors(computer, human)),
+            roundNumber++
+        )
+    }
 }
 
 function playFiveRounds() {
