@@ -2,12 +2,10 @@
 let humanScore = 0;
 let computerScore = 0;
 let roundNumber = 1;
+let computerChoice = '';
+let humanChoice = '';
 
 // then computer input
-function getComputerChoice() {
-   let number = Math.floor(Math.random() * 100) + 1;
-   return number;
-}
 function convertRockPaperScissors(number) {
     if (number > 66) {
         return 'scissors';
@@ -18,28 +16,50 @@ function convertRockPaperScissors(number) {
     }
 }
 
+function getComputerChoice() {
+   let number = Math.floor(Math.random() * 100) + 1;
+   return convertRockPaperScissors(number);
+}
+
 //round consists of getting user input
 function getHumanChoice() {
     let string = prompt('pick either Rock, Paper, or Scissors');
-    return tolowerCase(string);
+        return string.toLowerCase();
 }
 
 // then matching the two together
 function determine(computer, human) {
     if (computer > human) {
-        return (computerScore++, 'Computer: ' + computer + ' | Human: ' + human + ' Computer Wins');
+        return (computerScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Computer Wins --');
     } else if (computer < human) {
-        return (humanScore++, 'Computer: ' + computer + ' | Human: ' + human + ' Human Wins');
+        return (humanScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Human Wins --');
     } else {
-        return;
+        return ('It\'s a tie!');
     }
 }
+
+function logicRockPaperScissors(computer, human) {
+    computerChoice = computer;
+    humanChoice = human;
+    if (computer === human) {
+        return determine(0, 0);
+    } else if (
+        computer === 'rock' && human === 'scissors' ||
+        computer === 'paper' && human === 'rock' ||
+        computer === 'scissors' && human === 'paper'
+    ) {
+        return determine(1, 0);
+    } else {
+        return determine(0, 1);
+    }
+}
+
 
 // outputting the result
 function playRound(computer, human) {
     return( 
         console.log(('Round ' + roundNumber)),
-        console.log(determine(computer, human)),
+        console.log(logicRockPaperScissors(computer, human)),
         roundNumber++
     )
 }
@@ -50,8 +70,9 @@ function playFiveRounds() {
     console.log(playRound(getComputerChoice(), getHumanChoice()));
     console.log(playRound(getComputerChoice(), getHumanChoice()));
     console.log(playRound(getComputerChoice(), getHumanChoice()));
-    let winMessage = (humanScore > computerScore) ? ('Human Wins!') : ('Computer Wins!');
-    
+    let winMessage = (humanScore > computerScore) ? ('Human Wins!') : 
+    (humanScore < computerScore) ? ('Computer Wins!') :
+    ('It\'s a tie!');
     return (
         console.log('Final score: Human(' + humanScore + ') Computer(' + computerScore + ') ' + winMessage)
     )
