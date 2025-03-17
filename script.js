@@ -80,11 +80,11 @@ function playRound(computer, human) {
 }
 
 function playGame() {
-    console.log(playRound(getComputerChoice(), getHumanChoice()));
-    console.log(playRound(getComputerChoice(), getHumanChoice()));
-    console.log(playRound(getComputerChoice(), getHumanChoice()));
-    console.log(playRound(getComputerChoice(), getHumanChoice()));
-    console.log(playRound(getComputerChoice(), getHumanChoice()));
+    playRound(getComputerChoice(), getHumanChoice());
+    playRound(getComputerChoice(), getHumanChoice());
+    playRound(getComputerChoice(), getHumanChoice());
+    playRound(getComputerChoice(), getHumanChoice());
+    playRound(getComputerChoice(), getHumanChoice());
     let winMessage = (humanScore > computerScore) ? ('Human Wins!') : 
     (humanScore < computerScore) ? ('Computer Wins!') :
     ('It\'s a tie!');
