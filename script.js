@@ -60,10 +60,7 @@ function playRound(computer, human) {
     console.log(`${humanScore} ${computerScore}`)
     const result = document.querySelector('.results');
 
-    if (humanScore < 5 && computerScore < 5) {
-        return;
-    }
-    else if (humanScore === 5) {
+    if (humanScore === 5) {
         result.textContent = 'Human Wins!';
         buttonsContainer.forEach((button) => button.removeEventListener('click', getHumanChoice));
     }
