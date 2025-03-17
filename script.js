@@ -1,7 +1,5 @@
 // keeping score
 let roundNumber = 1;
-let computerChoice = '';
-let humanChoice = '';
 let humanScore = 0;
 let computerScore = 0;
 
@@ -17,22 +15,14 @@ function convertRockPaperScissors(number) {
 }
 
 function getComputerChoice() {
-   let number = Math.floor(Math.random() * 100) + 1;
-   return convertRockPaperScissors(number);
+    let number = Math.floor(Math.random() * 100) + 1;
+    return convertRockPaperScissors(number);
 }
 
 //round consists of getting user input
-function getHumanChoice() {
-    let string = prompt('pick either Rock, Paper, or Scissors');
-    if (string.toLowerCase() == 'rock' ||
-    string.toLowerCase() == 'paper' ||
-    string.toLowerCase() == 'scissors') {
-        return string.toLowerCase();
-    } else {
-        return (0);
-    }
-
-    }
+function getHumanChoice(event) {
+    playRound(getComputerChoice(), event.target.id);
+}
 
 // then matching the two together
 function determine(computer, human) {
@@ -64,23 +54,32 @@ function logicRockPaperScissors(computer, human) {
 
 // outputting the result
 function playRound(computer, human) {
-    if (
-    human != 'rock' &&
-    human != 'paper' &&
-    human != 'scissors'
-    ) {
-        return ('Invalid syntax');
-    } else {
-        return( 
-            console.log(('Round ' + roundNumber)),
-            console.log(logicRockPaperScissors(computer, human)),
-            roundNumber++
-        )
+    console.log(('Round ' + roundNumber)),
+    console.log(logicRockPaperScissors(computer, human)),
+    roundNumber++,
+    console.log(`${humanScore} ${computerScore}`)
+    const result = document.querySelector('.results');
+
+    if (humanScore < 5 && computerScore < 5) {
+        return;
+    }
+    else if (humanScore === 5) {
+        result.textContent = 'Human Wins!';
+        buttonsContainer.forEach((button) => button.removeEventListener('click', getHumanChoice));
+    }
+    else if (computerScore === 5) {
+        result.textContent = 'Computer Wins!';
+        buttonsContainer.forEach((button) => button.removeEventListener('click', getHumanChoice));
     }
 }
 
 
 
 
-//play a round
-// replaying each round 5 times
+// return the thing that I clicked and it's properties
+const buttonsContainer = document.querySelectorAll('button')
+
+buttonsContainer.forEach((button) => button.addEventListener('click', getHumanChoice));
+
+
+
