@@ -79,21 +79,6 @@ function playRound(computer, human) {
     }
 }
 
-function playGame() {
-    playRound(getComputerChoice(), getHumanChoice());
-    playRound(getComputerChoice(), getHumanChoice());
-    playRound(getComputerChoice(), getHumanChoice());
-    playRound(getComputerChoice(), getHumanChoice());
-    playRound(getComputerChoice(), getHumanChoice());
-    let winMessage = (humanScore > computerScore) ? ('Human Wins!') : 
-    (humanScore < computerScore) ? ('Computer Wins!') :
-    ('It\'s a tie!');
-    return (
-        console.log('Final score: Human(' + humanScore + ') Computer(' + computerScore + ') ' + winMessage)
-    )
-}
-
-playGame();
 
 
 
