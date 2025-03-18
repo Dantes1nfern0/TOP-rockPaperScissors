@@ -1,10 +1,9 @@
-// keeping score
+// Keep score
 let roundNumber = 1;
 let humanScore = 0;
 let computerScore = 0;
 
-// then computer input
-function convertRockPaperScissors(number) {
+function getRockPaperScissors(number) {
     if (number > 66) {
         return 'scissors';
     } else if (number <= 66 && number > 33) {
@@ -16,16 +15,15 @@ function convertRockPaperScissors(number) {
 
 function getComputerChoice() {
     let number = Math.floor(Math.random() * 100) + 1;
-    return convertRockPaperScissors(number);
+    return getRockPaperScissors(number);
 }
 
-//round consists of getting user input
 function getHumanChoice(event) {
     playRound(getComputerChoice(), event.target.id);
 }
 
 // then matching the two together
-function determine(computer, human) {
+function determineWhoWins(computer, human) {
 const roundMessage = document.querySelector('.round-message');
 const roundCount = document.querySelector('.round-count');
             
@@ -43,15 +41,15 @@ function logicRockPaperScissors(computer, human) {
     computerChoice = computer;
     humanChoice = human;
     if (computer === human) {
-        return determine(0, 0);
+        return determineWhoWins(0, 0);
     } else if (
         computer === 'rock' && human === 'scissors' ||
         computer === 'paper' && human === 'rock' ||
         computer === 'scissors' && human === 'paper'
     ) {
-        return determine(1, 0);
+        return determineWhoWins(1, 0);
     } else {
-        return determine(0, 1);
+        return determineWhoWins(0, 1);
     }
 }
 
@@ -88,9 +86,6 @@ function playRound(computer, human) {
     computerScoreDisplay.textContent = (`Computer Score: ${computerScore}`);
 
 }
-
-
-
 
 // return the thing that I clicked and it's properties
 const buttonsContainer = document.querySelectorAll('button')
