@@ -34,18 +34,16 @@ function determine(computer, human) {
             //     return ('It\'s a tie!');
             // }
             
-const roundMessage = document.createElement('p');
+const roundMessage = document.querySelector('.round-message');
 const roundCount = document.querySelector('.round-count');
             
     if (computer > human) {
-        roundMessage.textContent = (computerScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Computer Wins --');
+        roundMessage.textContent = (computerScore++, '-- Computer Wins -- | Computer: ' + computerChoice + ' | Human: ' + humanChoice);
     } else if (computer < human) {
-        roundMessage.textContent = (humanScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Human Wins --');
+        roundMessage.textContent = (humanScore++, ' -- Human Wins -- | Computer: ' + computerChoice + ' | Human: ' + humanChoice);
     } else {
         roundMessage.textContent = ('It\'s a tie!');
     }
-
-    
     roundCount.textContent = ('Round ' + roundNumber)
 }
 
