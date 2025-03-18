@@ -3,30 +3,41 @@
     <head>
         <meta charset='utf-8'>
         <title>Rock Paper Scissors</title>
-        <link href='./style.css'>
+        <link rel='stylesheet' href='./style.css'>
     </head>
     <body>
-        <h1>Rock, Paper, Scissors console game</h1>
+
+        <div class='header-container'>
+            <h1>Rock, Paper, Scissors Game</h1>
+        </div>
+
         <div id='rps-container'>
             <button id='rock'>Rock</button>
             <button id='paper'>Paper</button>
             <button id='scissors'>Scissors</button>
         </div>
+
         <div id='score-container'>
             <ul>
                 <li class='computer-score'>Computer Score:</li>
                 <li class='human-score'>Human Score:</li>
             </ul>
         </div>
+
         <div id='round-container'>
             <p class='round-count'>Round 0</p>
             <p class='round-message'>No decision has been made</p>
         </div>
-        
+
         <div class = 'results'></div>
 
         <div id='reset-container'>
         </div>
+
+        <footer class='footer-container'>
+            <p>Created by Dantes1nfern0</p>
+        </footer>
+    
         <script src='./script.js'></script>
     </body>
 </html>
