@@ -26,14 +26,6 @@ function getHumanChoice(event) {
 
 // then matching the two together
 function determine(computer, human) {
-    // if (computer > human) {
-    //     return (computerScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Computer Wins --');
-    // } else if (computer < human) {
-        //     return (humanScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Human Wins --');
-        // } else {
-            //     return ('It\'s a tie!');
-            // }
-            
 const roundMessage = document.querySelector('.round-message');
 const roundCount = document.querySelector('.round-count');
             
@@ -63,15 +55,19 @@ function logicRockPaperScissors(computer, human) {
     }
 }
 
-
-const scoreContainer = document.querySelector('#score-container');
-const resetContainer = document.querySelector('#reset-container');
-const humanScoreDisplay = document.querySelector('.human-score');
-const computerScoreDisplay = document.querySelector('.computer-score');
-
-
 // outputting the result
 function playRound(computer, human) {
+    const humanScoreDisplay = document.querySelector('.human-score');
+    const computerScoreDisplay = document.querySelector('.computer-score');
+
+    const resetContainer = document.querySelector('#reset-container');
+    const resetButton = document.createElement('button');
+    resetButton.textContent = ('Play Again?');
+
+    resetButton.addEventListener('click', () => {
+        window.location.reload();
+    })
+    
     logicRockPaperScissors(computer, human);
     roundNumber++;
     const result = document.querySelector('.results');
@@ -79,10 +75,13 @@ function playRound(computer, human) {
     if (humanScore === 5) {
         result.textContent = 'Human Wins!';
         buttonsContainer.forEach((button) => button.removeEventListener('click', getHumanChoice));
+        resetContainer.appendChild(resetButton);
+        
     }
     else if (computerScore === 5) {
         result.textContent = 'Computer Wins!';
         buttonsContainer.forEach((button) => button.removeEventListener('click', getHumanChoice));
+        resetContainer.appendChild(resetButton);
     }
 
     humanScoreDisplay.textContent = (`Human Score: ${humanScore}`);
