@@ -26,13 +26,27 @@ function getHumanChoice(event) {
 
 // then matching the two together
 function determine(computer, human) {
+    // if (computer > human) {
+    //     return (computerScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Computer Wins --');
+    // } else if (computer < human) {
+        //     return (humanScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Human Wins --');
+        // } else {
+            //     return ('It\'s a tie!');
+            // }
+            
+const roundMessage = document.createElement('p');
+const roundCount = document.querySelector('.round-count');
+            
     if (computer > human) {
-        return (computerScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Computer Wins --');
+        roundMessage.textContent = (computerScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Computer Wins --');
     } else if (computer < human) {
-        return (humanScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Human Wins --');
+        roundMessage.textContent = (humanScore++, 'Computer: ' + computerChoice + ' | Human: ' + humanChoice + ' -- Human Wins --');
     } else {
-        return ('It\'s a tie!');
+        roundMessage.textContent = ('It\'s a tie!');
     }
+
+    
+    roundCount.textContent = ('Round ' + roundNumber)
 }
 
 function logicRockPaperScissors(computer, human) {
@@ -53,7 +67,6 @@ function logicRockPaperScissors(computer, human) {
 
 
 const scoreContainer = document.querySelector('#score-container');
-const roundContainer = document.querySelector('#round-container');
 const resetContainer = document.querySelector('#reset-container');
 const humanScoreDisplay = document.querySelector('.human-score');
 const computerScoreDisplay = document.querySelector('.computer-score');
@@ -61,9 +74,8 @@ const computerScoreDisplay = document.querySelector('.computer-score');
 
 // outputting the result
 function playRound(computer, human) {
-    console.log(('Round ' + roundNumber))
-    console.log(logicRockPaperScissors(computer, human))
-    roundNumber++
+    logicRockPaperScissors(computer, human);
+    roundNumber++;
     const result = document.querySelector('.results');
     
     if (humanScore === 5) {
@@ -74,8 +86,10 @@ function playRound(computer, human) {
         result.textContent = 'Computer Wins!';
         buttonsContainer.forEach((button) => button.removeEventListener('click', getHumanChoice));
     }
+
     humanScoreDisplay.textContent = (`Human Score: ${humanScore}`);
     computerScoreDisplay.textContent = (`Computer Score: ${computerScore}`);
+
 }
 
 
