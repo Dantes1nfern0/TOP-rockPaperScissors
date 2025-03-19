@@ -12,39 +12,55 @@
             <h1>Rock, Paper, Scissors Game</h1>
         </div>
 
-        <div id='rps-container'>
-            <button id='rock'>
-                <i class="fa-solid fa-hand-back-fist fa-flip-horizontal"></i>
-            </button>
-            <button id='paper'>
-                <i class="fa-solid fa-hand fa-flip-horizontal"></i>
-            </button>
-            <button id='scissors'>
-                <i class="fa-solid fa-hand-scissors fa-rotate-90"></i>
-            </button>
-        </div>
+        <div class='game-container'>
+            <!-- <div class='computer-section'>
+                <button>
+                    <i class="fa-solid fa-hand-back-fist fa-flip-horizontal"></i>
+                </button>
+                <button>
+                    <i class="fa-solid fa-hand fa-flip-horizontal"></i>
+                </button>
+                <button>
+                    <i class="fa-solid fa-hand-scissors fa-rotate-90"></i>
+                </button>
+            </div> -->
+            <div class='player-section'>
+                <div class='selection-container'>
+                </div>
+                <div id='rps-container'>
+                    <button>
+                        <i class="fa-solid fa-hand-back-fist fa-flip-horizontal" id='rock'></i>
+                    </button>
+                    <button>
+                        <i class="fa-solid fa-hand fa-flip-horizontal" id='paper'></i>
+                    </button>
+                    <button>
+                        <i class="fa-solid fa-hand-scissors fa-rotate-90" id='scissors'></i>
+                    </button>
+                </div>
+            </div>
 
-        <div id='score-container'>
-            <ul>
-                <li class='computer-score'>Computer Score:</li>
-                <li class='human-score'>Human Score:</li>
-            </ul>
-        </div>
+            <div id='score-container'>
+                <ul>
+                    <li class='computer-score'>Computer Score:</li>
+                    <li class='human-score'>Human Score:</li>
+                </ul>
+            </div>
 
-        <div id='round-container'>
-            <p class='round-count'>Round 0</p>
-            <p class='round-message'>No decision has been made</p>
-        </div>
+            <div id='round-container'>
+                <p class='round-count'>Round 0</p>
+                <p class='round-message'>No decision has been made</p>
+            </div>
 
-        <div class = 'results'></div>
+            <div class = 'results'></div>
 
-        <div id='reset-container'>
+            <div id='reset-container'>
+            </div>
         </div>
 
         <footer class='footer-container'>
             <p>Created by Dantes1nfern0</p>
         </footer>
-    
         <script src='./script.js'></script>
     </body>
 </html>

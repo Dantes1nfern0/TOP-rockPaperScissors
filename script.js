@@ -7,13 +7,26 @@ let computerScore = 0;
 function determineWhoWins(computer, human) {
     const roundCount = document.querySelector('.round-count');
     roundCount.textContent = ('Round ' + roundNumber)
+
+    const humanScoreDisplay = document.querySelector('.human-score');
+    const computerScoreDisplay = document.querySelector('.computer-score');
+    function roundScore() {
+        if (computer > human) {
+            return computerScore++;
+        } else if (computer < human) {
+            return humanScore++;
+        }
+    }
+    roundScore()
+    humanScoreDisplay.textContent = (`Human Score: ${humanScore}`);
+    computerScoreDisplay.textContent = (`Computer Score: ${computerScore}`);
     
     const roundMessage = document.querySelector('.round-message');
     function roundMessageFunc() {
         if (computer > human) {
-            return (computerScore++, '-- Computer Wins -- | Computer: ' + computerChoice + ' | Human: ' + humanChoice);
+            return ('-- Computer Wins -- | Computer: ' + computerChoice + ' | Human: ' + humanChoice);
         } else if (computer < human) {
-            return (humanScore++, ' -- Human Wins -- | Computer: ' + computerChoice + ' | Human: ' + humanChoice);
+            return (' -- Human Wins -- | Computer: ' + computerChoice + ' | Human: ' + humanChoice);
         } else {
             return ('-- No Winner -- | It\'s a tie!');
         }
@@ -38,11 +51,6 @@ function logicRockPaperScissors(computer, human) {
 }
 
 function playRound(computer, human) {
-    const humanScoreDisplay = document.querySelector('.human-score');
-    const computerScoreDisplay = document.querySelector('.computer-score');
-    humanScoreDisplay.textContent = (`Human Score: ${humanScore}`);
-    computerScoreDisplay.textContent = (`Computer Score: ${computerScore}`);
-    
     const resetContainer = document.querySelector('#reset-container');
     const resetButton = document.createElement('button');
     resetButton.textContent = ('Play Again?');
