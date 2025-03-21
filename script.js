@@ -7,7 +7,7 @@ let computerScore = 0;
 function determineWhoWins(computer, human) {
     const roundCount = document.querySelector('.round-count');
     roundCount.textContent = ('Round ' + roundNumber)
-
+    
     const humanScoreDisplay = document.querySelector('.human-score');
     const computerScoreDisplay = document.querySelector('.computer-score');
     function roundScore() {
@@ -21,6 +21,7 @@ function determineWhoWins(computer, human) {
     humanScoreDisplay.textContent = (`Human Score: ${humanScore}`);
     computerScoreDisplay.textContent = (`Computer Score: ${computerScore}`);
     
+    
     const roundMessage = document.querySelector('.round-message');
     function roundMessageFunc() {
         if (computer > human) {
@@ -31,6 +32,7 @@ function determineWhoWins(computer, human) {
             return ('-- No Winner -- | It\'s a tie!');
         }
     }
+
     roundMessage.textContent = roundMessageFunc()
 }
 
@@ -92,5 +94,5 @@ function getHumanChoice(event) {
     playRound(getComputerChoice(), event.target.id);
 }
 
-const buttonsContainer = document.querySelectorAll('button')
+const buttonsContainer = document.querySelectorAll('.player')
 buttonsContainer.forEach((button) => button.addEventListener('click', getHumanChoice));
