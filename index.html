@@ -14,19 +14,19 @@
 
         <div class='game-container'>
 
-            <div class='computer-section section'>
+            <div class='computer-container'>
                 <div class='selection-container'>
-                </div>
-                <div class='button-container'>
-                    <button>
-                        <i class="fa-solid fa-hand-back-fist fa-flip-horizontal"></i>
-                    </button>
-                    <button>
-                        <i class="fa-solid fa-hand fa-flip-horizontal"></i>
-                    </button>
-                    <button>
-                        <i class="fa-solid fa-hand-scissors fa-rotate-90"></i>
-                    </button>
+                    <div class='button-container'>
+                        <button>
+                            <i class="fa-solid fa-hand-back-fist fa-flip-horizontal"></i>
+                        </button>
+                        <button>
+                            <i class="fa-solid fa-hand fa-flip-horizontal"></i>
+                        </button>
+                        <button>
+                            <i class="fa-solid fa-hand-scissors fa-rotate-90"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -49,19 +49,22 @@
                 </div>
             </div>
 
-            <div class='player-section section'>
+            <div class='player-container'>
                 <div class='selection-container'>
+                    <div class='button-container'>
+                        <button>
+                            <i class="fa-solid fa-hand-back-fist fa-flip-horizontal player" id='rock'></i>
+                        </button>
+                        <button>
+                            <i class="fa-solid fa-hand fa-flip-horizontal player" id='paper'></i>
+                        </button>
+                        <button>
+                            <i class="fa-solid fa-hand-scissors fa-rotate-90 player" id='scissors'></i>
+                        </button>
+                    </div>
                 </div>
-                <div class='button-container'>
-                    <button>
-                        <i class="fa-solid fa-hand-back-fist fa-flip-horizontal player" id='rock'></i>
-                    </button>
-                    <button>
-                        <i class="fa-solid fa-hand fa-flip-horizontal player" id='paper'></i>
-                    </button>
-                    <button>
-                        <i class="fa-solid fa-hand-scissors fa-rotate-90 player" id='scissors'></i>
-                    </button>
+                <div class="game-history-container">
+                    <button class="game-history-button">Game history</button>
                 </div>
             </div>
 
