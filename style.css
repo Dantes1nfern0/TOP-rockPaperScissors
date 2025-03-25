@@ -4,7 +4,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
 }
 
 body {
@@ -22,37 +22,126 @@ body {
     align-items: center;
 }
 
-
 .game-container {
-    background-color: #E1E1E1;
+    background-color: #E7E7E7;
     display: flex;
     flex: 1;
 }
 
-/* Beginning of game-container */
 
+/* Beginning of game-container */
 .game-content {
     display: flex;
     flex: 1;
+    height: 700px;
 }
 
 .history-container {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
 }
 
+.history-box, .round-info-box {
+    display: flex;
+    height: 375px;
+    width: 225px;
+    background-color: #F3F3F3;
+    padding: 30px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.history-box h2 {
+    font-weight: normal;;
+    font-size: large;
+    margin: 10px;
+}
+
+#history-log {
+    padding: 0 0px;
+}
+
+ul {
+    list-style: none;
+    font-size:x-small;
+}
+i {
+    font-size: 70px;
+}
 
 .gameplay-container {
     flex-direction: column;
+    flex: 1.5;
+    margin: 0 50px;
+}
+
+.rps-button {
+    width: 140px;
+    height: 140px;
+    background-color: #BFBFBF;
+    border: none;
+    border-radius: 5px;
+}
+
+.cpu-select-container, .player-select-container {
+    display: flex;
+    flex: 3;
+    justify-content: center;
+    gap: 50px;
+}
+
+.cpu-select-container {
+    align-items: end;
+}
+
+.message-bar-container {
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center ;
+}
+
+.cpu-score-container, .player-score-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.cpu-score-container {
+    align-items: end;
+}
+
+.player-score-container {
+    align-items: start;
 }
 
 .round-info-container {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
+.round-info-box .round-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    text-align: center;
+}
+
+.round-info-box {
+    padding: 40px 0;
+}
+
+.round-info-box .round-message {
+    font-size: x-large;
+}
+.round-info-box .round-count {
+    text-decoration: underline;
+}
 /* End of game-container */
 
 .footer-container {
