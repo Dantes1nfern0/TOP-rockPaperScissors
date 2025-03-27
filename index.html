@@ -15,19 +15,8 @@
             <div class="history-container game-content">
                 <div class="history-box">
                     <h2>Game History</h2>
-                    <div id="history-log">
-                        <ul>
-                            <li>Round 11: It’s a tie!<br>
-                                CPU - Paper | Player: Paper</li>
-                            <br>
-                            <li>Round 10: CPU wins! <br>
-                                CPU - Scissors | Player: Paper</li>
-                            <br>
-                            <li>Round 9: Human wins! <br>
-                                CPU - Rock | Player: Paper</li>
-                            <br>
-                            <li>Round 8: CPU Wins! <br>
-                                CPU - Rock | Player: Scissors</li>
+                    <div>
+                        <ul id="history-log">
                         </ul>
                     </div>
                 </div>
@@ -35,15 +24,15 @@
 
             <div class="gameplay-container game-content">
                 <div class="cpu-select-container">
-                    <button class="rps-button" id="cpu-rock"><i class="fa-solid fa-hand-back-fist fa-rotate-180"></i></button>
-                    <button class="rps-button" id="cpu-paper"><i class="fa-solid fa-hand fa-rotate-180"></i></button>
-                    <button class="rps-button" id="cpu-scissors"><i class="fa-solid fa-hand-scissors fa-rotate-270"></i></button>
+                    <button class="rps-button cpu" id="cpu-rock"><i class="fa-solid fa-hand-back-fist fa-rotate-180"></i></button>
+                    <button class="rps-button cpu" id="cpu-paper"><i class="fa-solid fa-hand fa-rotate-180"></i></button>
+                    <button class="rps-button cpu" id="cpu-scissors"><i class="fa-solid fa-hand-scissors fa-rotate-270"></i></button>
                 </div>
                 <div class="cpu-score-container">
                     <div id="cpu-score">* * * * *</div>
                 </div>
                 <div class="message-bar-container">
-                    <p id="message-bar">Make a selection...</p>
+                    <p>Make a selection...</p>
                 </div>
                 <div class="player-score-container">
                     <div id="player-score">* * * * *</div>
@@ -60,18 +49,18 @@
             <div class="round-info-container game-content">
                 <div class="round-info-box">
                     <div class="round-cpu-score">
-                        <p>CPU Score: 2</p>
+                        <p>CPU Score: 0</p>
                     </div>
                     <div class="round-info">
                         <div class="round-count">
-                            <p>Round 11</p>
+                            <p>Round: 0</p>
                         </div>
                         <div class="round-message">
-                            <p>It's a tie!</p>
+                            <p>...</p>
                         </div>
                     </div>
                     <div class="round-player-score">
-                        <p>Score: 4</p>
+                        <p>Score: 0</p>
                     </div>
                 </div>
             </div>
