@@ -146,17 +146,32 @@ function RPSLogic(computer, player) {
         } else {
             winMessage = 'It\'s a tie'
         }
-        roundMessage.textContent = winMessage
-        function gameLogList() {
-            if (computerScore == 5){
-                winMessage = 'CPU wins!';
-            } else if (playerScore == 5) {
-                winMessage = 'You win!';
-            }
-            const gameLogItem = document.createElement('li');
-            gameLogItem.innerHTML = (`Round ${roundNumber - 1}: ${winMessage} <br> CPU: ${computer} | Player: ${player}`);
-            gameHistory.prepend(gameLogItem);
+
+        const logRoundHeader = document.querySelector('.history-header-round');
+        const logCpuHeader = document.querySelector('.history-header-cpu');
+        const logPlayerHeader = document.querySelector('.history-header-player');
+        function gameLogListContent() {
+            // round number
+            const logRoundNode = document.createElement('li');
+            const logRoundText = document.createTextNode(`${roundNumber - 1}`);
+        
+            logRoundNode.appendChild(logRoundText);
+            logRoundHeader.after(logRoundNode);
+            // cpu choice
+            const logCpuNode = document.createElement('li');
+            const logCpuText = document.createTextNode(`${computer}`);
+            logCpuNode.appendChild(logCpuText);
+            logCpuHeader.after(logCpuNode);
+            // player choice
+            const logPlayerNode = document.createElement('li');
+            const logPlayerText = document.createTextNode(`${player}`);
+            logPlayerNode.appendChild(logPlayerText);
+            logPlayerHeader.after(logPlayerNode);
+            // const gameLogItem = document.createElement('li');
+            // gameLogItem.innerHTML = (`Round ${roundNumber - 1}: ${winMessage} <br> CPU: ${computer} | Player: ${player}`);
+            // gameHistory.prepend(gameLogItem);
+            roundMessage.textContent = (winMessage);
         }
-        gameLogList();
+        gameLogListContent();
     }
 }

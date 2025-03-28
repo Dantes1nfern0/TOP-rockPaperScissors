@@ -53,14 +53,16 @@ body {
     gap: 20px;
 }
 
+.history-log-content {
+    display: flex;
+    gap: 20px; 
+    text-align: center;
+}
+
 .history-box h2 {
     font-weight: normal;;
     font-size: large;
     margin: 10px;
-}
-
-#history-log {
-    padding: 0 0px;
 }
 
 ul {
