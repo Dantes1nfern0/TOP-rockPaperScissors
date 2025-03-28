@@ -67,6 +67,12 @@ ul {
     list-style: none;
     font-size:x-small;
 }
+
+.message-bar-container ul {
+    font-size: medium;
+    text-align: center;
+}
+
 i {
     font-size: 70px;
 }
@@ -83,6 +89,11 @@ i {
     background-color: #BFBFBF;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.cpu {
+    cursor: default;
 }
 
 .cpu-select-container, .player-select-container {

@@ -1,7 +1,9 @@
 
+const oneSecond = 1000
 let roundNumber = 1;
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
+
 
 function getComputerChoice() {
     let number = Math.floor(Math.random() * 100) + 1;
@@ -14,7 +16,7 @@ function getComputerChoice() {
     }
 }
 
-function rpsStamp(e) {
+function rpsPlayerSelection(e) {
     const rpsArray = ['rock', 'paper', 'scissors'];
     for (i = 0; i < rpsArray.length; i++) {
         if (e.target.classList.contains(rpsArray[i]) == true) {
@@ -23,82 +25,123 @@ function rpsStamp(e) {
     }
 }
 
-const playerButtons = document.querySelectorAll('.player');
-playerButtons.forEach((element) => element.addEventListener('click', getHumanChoice));
+const gameContainer = document.querySelector('.game-container')
 const rpsButtons = document.querySelectorAll('.rps-button');
+const messageBarDefault = document.querySelector('.message-bar-default');
+rpsButtons.forEach((element) => element.addEventListener('mouseleave', defaultLeaveHoverMessageBar));
+function defaultLeaveHoverMessageBar(e) {
+    messageBarDefault.textContent = ('Make a selection...');
+}
 rpsButtons.forEach((element) => element.addEventListener('mouseenter', defaultHoverMessageBar));
-
-const messageBar = document.querySelector('.message-bar-container');
 function defaultHoverMessageBar(e) {
     if (e.target.classList.contains('cpu')) {
-        messageBar.textContent = ('No peeking!');
+        messageBarDefault.textContent = ('No peeking!');
     } else if (e.target.classList.contains('player')) {
-        messageBar.textContent = (`Going with ${rpsStamp(e)}?`);
+        messageBarDefault.textContent = (`Going with ${rpsPlayerSelection(e)}?`);
     }
-    rpsButtons.forEach((element) => element.addEventListener('mouseleave', () => {
-        messageBar.textContent = ('Make a selection...');
-    }))
 }
 
-function getHumanChoice(e) {
-    playRound(getComputerChoice(), rpsStamp(e));
+const playerButtons = document.querySelectorAll('.player');
+playerButtons.forEach((element) => element.addEventListener('click', getPlayerChoice));
+function getPlayerChoice(e) {
+    computerChoice = getComputerChoice();
+
+    messageBarDefault.textContent = (`You chose: ${rpsPlayerSelection(e)} | CPU chose: `);
+    const loadingSpan = document.createElement('span');
+    loadingSpan.classList.add('load');
+    loadingSpan.textContent = '.';
+    messageBarDefault.appendChild(loadingSpan);
+    setInterval(() => {
+        if (loadingSpan.innerHTML.length > 2) {
+            loadingSpan.innerHTML = '';
+        } else {
+            loadingSpan.innerHTML += '.';
+        }
+    }, 250);
+
+    // Remove hover and click events during CPU Selection
+    rpsButtons.forEach((element) => element.removeEventListener('mouseleave', defaultLeaveHoverMessageBar));
+    rpsButtons.forEach((element) => element.removeEventListener('mouseenter', defaultHoverMessageBar));
+    playerButtons.forEach((element) => element.removeEventListener('click', getPlayerChoice));
+    gameContainer.style.cursor = 'progress';
+    
+    setTimeout(() => {
+        playRound(computerChoice, rpsPlayerSelection(e));
+        messageBarDefault.textContent = (`You chose: ${rpsPlayerSelection(e)} | CPU chose: ${computerChoice}`);
+    }, oneSecond * 0.75);
 }
 
 const roundCount = document.querySelector('.round-count');
 const roundMessage = document.querySelector('.round-message');
-
-function playRound(computer, human) {
+const messageBarList = document.querySelector('#message-bar-list');
+function playRound(computer, player) {
     roundCount.textContent = (`Round: ${roundNumber++}`);
-    RPSLogic(computer, human);
+    RPSLogic(computer, player);
     // Game end check
-    if (computerScore != 5 && humanScore != 5) {
+    if (computerScore != 5 && playerScore != 5) {
+        // Add hover and click events back to page after CPU Selection
+        setTimeout(() => {
+            playerButtons.forEach((element) => element.addEventListener('click', getPlayerChoice));
+            rpsButtons.forEach((element) => element.addEventListener('mouseenter', defaultHoverMessageBar));
+            rpsButtons.forEach((element) => element.addEventListener('mouseleave', defaultLeaveHoverMessageBar));
+            gameContainer.style.cursor = 'default';
+        }, oneSecond * 0.15);
         return
     } else {
-        playerButtons.forEach((element) => element.removeEventListener('click', getHumanChoice));
-        if (humanScore > computerScore) {
+        playerButtons.forEach((element) => element.removeEventListener('click', getPlayerChoice));
+        
+        const playerWinOrLoseMsg = document.createElement('li');
+        const playerWinOrLoseMsgText = document.createTextNode('You win the game! Congratulations!');
+        
+        if (playerScore > computerScore) {
             roundMessage.textContent = 'You win!'
+            playerWinOrLoseMsg.appendChild(playerWinOrLoseMsgText);
         } else {
             roundMessage.textContent = 'CPU wins!'
+            const playerWinOrLoseMsgText = document.createTextNode('CPU wins the game. Better luck next time.');
+            playerWinOrLoseMsg.appendChild(playerWinOrLoseMsgText);
         }
+        messageBarList.appendChild(playerWinOrLoseMsg);
+        gameContainer.style.cursor = 'default';
+
+        setTimeout(() => {
         const resetButton = document.createElement('button');
         resetButton.addEventListener('click', () => window.location.reload());
         resetButton.textContent = 'Play Again?';
 
         rpsButtons.forEach((element) => element.removeEventListener('mouseenter', defaultHoverMessageBar));
         rpsButtons.forEach((element) => element.addEventListener('mouseleave', () => {
-            messageBar.textContent = '';
-            messageBar.appendChild(resetButton);
+            messageBarList.appendChild(resetButton);
         }));
-        messageBar.textContent = '';
-        messageBar.appendChild(resetButton);
+        messageBarList.appendChild(resetButton);
+        }, oneSecond * 1.5);
     }
 }
 
 const cpuScore = document.querySelector('.round-cpu-score');
-const playerScore = document.querySelector('.round-player-score');
+const playerScoreBox = document.querySelector('.round-player-score');
 const gameHistory = document.querySelector('#history-log');
-
-function RPSLogic(computer, human) {
+function RPSLogic(computer, player) {
     let winMessage;
-    if (computer == human) {
+    if (computer == player) {
         return RoundOutcome(0, 0);
     } else if (
-        computer == 'rock' && human == 'scissors' ||
-        computer == 'paper' && human == 'rock' ||
-        computer == 'scissors' && human == 'paper'
+        computer == 'rock' && player == 'scissors' ||
+        computer == 'paper' && player == 'rock' ||
+        computer == 'scissors' && player == 'paper'
     ) {
         return RoundOutcome(1, 0);
     } else {
         return RoundOutcome(0, 1);
     }
-    function RoundOutcome(computerOutput, humanOutput) {
-        if (computerOutput > humanOutput) {
+    function RoundOutcome(computerOutput, playerOutput) {
+        if (computerOutput > playerOutput) {
             computerScore++
             cpuScore.textContent = (`CPU Score: ${computerScore}`)
             winMessage = 'CPU won!'
-        } else if (computerOutput < humanOutput) {
-            humanScore++
-            playerScore.textContent = (`Score: ${humanScore}`)
+        } else if (computerOutput < playerOutput) {
+            playerScore++
+            playerScoreBox.textContent = (`Score: ${playerScore}`)
             winMessage = 'You won!'
         } else {
             winMessage = 'It\'s a tie'
@@ -107,24 +150,13 @@ function RPSLogic(computer, human) {
         function gameLogList() {
             if (computerScore == 5){
                 winMessage = 'CPU wins!';
-            } else if (humanScore == 5) {
+            } else if (playerScore == 5) {
                 winMessage = 'You win!';
             }
             const gameLogItem = document.createElement('li');
-            gameLogItem.innerHTML = (`Round ${roundNumber - 1}: ${winMessage} <br> CPU: ${computer} | Player: ${human}`);
+            gameLogItem.innerHTML = (`Round ${roundNumber - 1}: ${winMessage} <br> CPU: ${computer} | Player: ${player}`);
             gameHistory.prepend(gameLogItem);
         }
         gameLogList();
     }
 }
-
-// function messageBar()
-
-// Click events:
-// - If the player clicks one of the player buttons: 'You selected: {player RPS text} | CPU chose: ...'
-// - When the player clicks after the initial selection: 'You selected: {player RPS text} | CPU chose: {CPU RPS text}'
-// - If it's the final deciding round then display either:
-//      - If the player wins: 'Congratulations, you won the game!' and then 'Play Again?' button after another click
-//      - If the player loses: 'You can do better...' and then 'Try Again?' button after another click
-
-// - If it's NOT the final deciding round: when player clicks again then reset make to 'Make a selection...'
