@@ -106,8 +106,10 @@ function playRound(computer, player) {
 
         setTimeout(() => {
         const resetButton = document.createElement('button');
-        resetButton.addEventListener('click', () => window.location.reload());
         resetButton.textContent = 'Play Again?';
+        resetButton.setAttribute('style' ,'background-color: #F3F3F3; box-shadow: 0px 5px 4px -1px #adaca8; border-radius: 5px; width: 180px; height: 45px; margin-top: 10px; font-weight: light; font-size: 22px; border: none;')
+        resetButton.setAttribute('activate', ' box-shadow: inset 0 2px 3px #adaca8;')
+        resetButton.addEventListener('click', () => window.location.reload());
 
         rpsButtons.forEach((element) => element.removeEventListener('mouseenter', defaultHoverMessageBar));
         rpsButtons.forEach((element) => element.addEventListener('mouseleave', () => {
@@ -167,11 +169,10 @@ function RPSLogic(computer, player) {
             const logPlayerText = document.createTextNode(`${player}`);
             logPlayerNode.appendChild(logPlayerText);
             logPlayerHeader.after(logPlayerNode);
-            // const gameLogItem = document.createElement('li');
-            // gameLogItem.innerHTML = (`Round ${roundNumber - 1}: ${winMessage} <br> CPU: ${computer} | Player: ${player}`);
-            // gameHistory.prepend(gameLogItem);
             roundMessage.textContent = (winMessage);
         }
         gameLogListContent();
     }
 }
+
+
