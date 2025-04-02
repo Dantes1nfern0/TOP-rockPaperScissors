@@ -30,7 +30,7 @@ body {
 
 /* Beginning of game-container */
 
-.history-box, .rps-button, .round-info-box {
+.history-box, .rps-button, .round-info-box, .play-again-button {
     box-shadow: 0px 5px 4px -1px #adaca8;
     border-radius: 5px;
 }
@@ -145,6 +145,29 @@ i::before {
     cursor: default;
 }
 
+.play-again-button {
+    background-color: #F3F3F3;
+    width: 180px;
+    height: 45px;
+    margin-top: 10px;
+    font-weight: light;
+    font-size: 22px;
+    border: none;
+    display: none;
+}
+
+.play-again-button:hover {
+    width: 198px;
+    height: 50px;
+    font-size: 24px;
+    text-decoration: underline;
+}
+
+.play-again-button:active {
+    padding-top: 8px;
+    box-shadow: inset 0 2px 3px #adaca8;
+}
+
 .cpu-select-container, .player-select-container {
     display: flex;
     flex: 3;
@@ -170,6 +193,7 @@ i::before {
 
 .message-bar-container {
     display: flex;
+    flex-direction: column;
     flex: 2;
     justify-content: center;
     align-items: center ;

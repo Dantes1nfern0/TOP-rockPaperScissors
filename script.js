@@ -25,6 +25,7 @@ function rpsPlayerSelection(e) {
     }
 }
 
+
 const gameContainer = document.querySelector('.game-container')
 const rpsButtons = document.querySelectorAll('.rps-button');
 const messageBarDefault = document.querySelector('.message-bar-default');
@@ -45,7 +46,7 @@ const playerButtons = document.querySelectorAll('.player');
 playerButtons.forEach((element) => element.addEventListener('click', getPlayerChoice));
 function getPlayerChoice(e) {
     computerChoice = getComputerChoice();
-
+    
     messageBarDefault.textContent = (`You chose: ${rpsPlayerSelection(e)} | CPU chose: `);
     const loadingSpan = document.createElement('span');
     loadingSpan.classList.add('load');
@@ -58,7 +59,7 @@ function getPlayerChoice(e) {
             loadingSpan.innerHTML += '.';
         }
     }, 250);
-
+    
     // Remove hover and click events during CPU Selection
     rpsButtons.forEach((element) => element.removeEventListener('mouseleave', defaultLeaveHoverMessageBar));
     rpsButtons.forEach((element) => element.removeEventListener('mouseenter', defaultHoverMessageBar));
@@ -71,15 +72,17 @@ function getPlayerChoice(e) {
     }, oneSecond * 0.75);
 }
 
+
 const roundCount = document.querySelector('.round-count');
 const roundMessage = document.querySelector('.round-message');
 const messageBarList = document.querySelector('#message-bar-list');
 function playRound(computer, player) {
     roundCount.textContent = (`Round: ${roundNumber++}`);
+    visualScoreDisplay();
     RPSLogic(computer, player);
     // Game end check
     if (computerScore != 5 && playerScore != 5) {
-        // Add hover and click events back to page after CPU Selection
+        // Add hover and click events back to page after CPU Selection.
         setTimeout(() => {
             playerButtons.forEach((element) => element.addEventListener('click', getPlayerChoice));
             rpsButtons.forEach((element) => element.addEventListener('mouseenter', defaultHoverMessageBar));
@@ -103,22 +106,25 @@ function playRound(computer, player) {
         }
         messageBarList.appendChild(playerWinOrLoseMsg);
         gameContainer.style.cursor = 'default';
-
+        
         setTimeout(() => {
-        const resetButton = document.createElement('button');
-        resetButton.textContent = 'Play Again?';
-        resetButton.setAttribute('style' ,'background-color: #F3F3F3; box-shadow: 0px 5px 4px -1px #adaca8; border-radius: 5px; width: 180px; height: 45px; margin-top: 10px; font-weight: light; font-size: 22px; border: none;')
-        resetButton.setAttribute('activate', ' box-shadow: inset 0 2px 3px #adaca8;')
-        resetButton.addEventListener('click', () => window.location.reload());
-
-        rpsButtons.forEach((element) => element.removeEventListener('mouseenter', defaultHoverMessageBar));
-        rpsButtons.forEach((element) => element.addEventListener('mouseleave', () => {
-            messageBarList.appendChild(resetButton);
-        }));
-        messageBarList.appendChild(resetButton);
+            const resetButton = document.querySelector('.play-again-button');
+            resetButton.addEventListener('click', () => window.location.reload());
+            resetButton.style.display = 'block';
+            rpsButtons.forEach((element) => element.removeEventListener('mouseenter', defaultHoverMessageBar));
+            rpsButtons.forEach((element) => element.addEventListener('mouseleave', () => {
+                resetButton.style.display = 'block';
+            }));
+            resetButton.style.display = 'block';
         }, oneSecond * 1.5);
     }
 }
+
+
+// function visualScoreDisplay() {
+//     document.querySelector(`player-score-${playerScore}`);
+//     console.log(computerScore);
+// }
 
 const cpuScore = document.querySelector('.round-cpu-score');
 const playerScoreBox = document.querySelector('.round-player-score');
