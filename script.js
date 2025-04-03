@@ -46,8 +46,6 @@ playerButtons.forEach((element) => element.addEventListener('click', getPlayerCh
 function getPlayerChoice(e) {
     computerChoice = getComputerChoice();
     buttonSound()
-    
-    playerButtons.forEach((element) => element.removeEventListener('click', getPlayerChoice));
 
     messageBarDefault.textContent = (`You chose: ${rpsPlayerSelection(e)} | CPU chose: `);
     const loadingSpan = document.createElement('span');
