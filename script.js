@@ -4,7 +4,6 @@ let roundNumber = 1;
 let playerScore = 0;
 let computerScore = 0;
 
-
 function getComputerChoice() {
     let number = Math.floor(Math.random() * 100) + 1;
     if (number <= 33) {
@@ -24,7 +23,6 @@ function rpsPlayerSelection(e) {
         }
     }
 }
-
 
 const gameContainer = document.querySelector('.game-container')
 const rpsButtons = document.querySelectorAll('.rps-button');
@@ -72,13 +70,35 @@ function getPlayerChoice(e) {
     }, oneSecond * 0.75);
 }
 
+function gameEndDisplay() {
+    let redGlow = '0px 0px 10px 2px #FF7575';
+    let blueGlow = '0px 0px 10px 2px #8181FF';
+    let red = '#FF7575';
+    let blue = '#8181FF';
+    let darkGrey = '#787878';
+    const computerCircles = document.querySelectorAll('#cpu-score .circle');
+    const computerRpsButtons = document.querySelectorAll('.cpu');
+    const playerCircles = document.querySelectorAll('#player-score .circle');
+    const playerRpsButtons = document.querySelectorAll('.player');
+    if (computerScore == 5) {
+        computerCircles.forEach((element) => element.style.boxShadow = redGlow);
+        computerRpsButtons.forEach((element) => element.style.boxShadow = redGlow);
+        computerRpsButtons.forEach((element) => element.style.backgroundColor = red);
+        playerRpsButtons.forEach((element) => element.style.backgroundColor = darkGrey)
+    }
+    else if (playerScore == 5) {
+        playerCircles.forEach((element) => element.style.boxShadow = blueGlow);
+        playerRpsButtons.forEach((element) => element.style.boxShadow = blueGlow);
+        playerRpsButtons.forEach((element) => element.style.backgroundColor = blue);
+        computerRpsButtons.forEach((element) => element.style.backgroundColor = darkGrey);
+    }
+}
 
 const roundCount = document.querySelector('.round-count');
 const roundMessage = document.querySelector('.round-message');
 const messageBarList = document.querySelector('#message-bar-list');
 function playRound(computer, player) {
     roundCount.textContent = (`Round: ${roundNumber++}`);
-    visualScoreDisplay();
     RPSLogic(computer, player);
     // Game end check
     if (computerScore != 5 && playerScore != 5) {
@@ -91,6 +111,7 @@ function playRound(computer, player) {
         }, oneSecond * 0.15);
         return
     } else {
+        gameEndDisplay();
         playerButtons.forEach((element) => element.removeEventListener('click', getPlayerChoice));
         
         const playerWinOrLoseMsg = document.createElement('li');
@@ -120,12 +141,6 @@ function playRound(computer, player) {
     }
 }
 
-
-// function visualScoreDisplay() {
-//     document.querySelector(`player-score-${playerScore}`);
-//     console.log(computerScore);
-// }
-
 const cpuScore = document.querySelector('.round-cpu-score');
 const playerScoreBox = document.querySelector('.round-player-score');
 const gameHistory = document.querySelector('#history-log');
@@ -145,10 +160,15 @@ function RPSLogic(computer, player) {
     function RoundOutcome(computerOutput, playerOutput) {
         if (computerOutput > playerOutput) {
             computerScore++
+            const visualComputerScore = document.querySelector(`.cpu-score-${computerScore}`);
+            visualComputerScore.style.backgroundColor = '#FF7575'
             cpuScore.textContent = (`CPU Score: ${computerScore}`)
+            
             winMessage = 'CPU won!'
         } else if (computerOutput < playerOutput) {
             playerScore++
+            const visualPlayerScore = document.querySelector(`.player-score-${playerScore}`);
+            visualPlayerScore.style.backgroundColor = '#8181FF'
             playerScoreBox.textContent = (`Score: ${playerScore}`)
             winMessage = 'You won!'
         } else {
