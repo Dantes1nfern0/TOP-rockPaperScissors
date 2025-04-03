@@ -133,7 +133,7 @@ i::before {
     border: 2px solid #8181FF;
 }
 
-.rps-button.player:hover {
+.hover:hover {
     background-color: #F3F3F3;
 }
 
@@ -246,6 +246,26 @@ i::before {
 }
 .round-info-box .round-count {
     text-decoration: underline;
+}
+
+.cpu-win-glow {
+    box-shadow: 0px 0px 10px 4px #FF7575;
+}
+
+.cpu-win-color{
+    background-color: #FF7575;
+}
+
+.player-win-glow {
+    box-shadow: 0px 0px 10px 4px #8181FF;
+}
+
+.player-win-color {
+    background-color: #8181FF;
+}
+
+.rps-lose {
+    background-color: #787878;
 }
 /* End of game-container */
 

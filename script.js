@@ -62,7 +62,6 @@ function getPlayerChoice(e) {
     rpsButtons.forEach((element) => element.removeEventListener('mouseleave', defaultLeaveHoverMessageBar));
     rpsButtons.forEach((element) => element.removeEventListener('mouseenter', defaultHoverMessageBar));
     playerButtons.forEach((element) => element.removeEventListener('click', getPlayerChoice));
-    gameContainer.style.cursor = 'progress';
     
     setTimeout(() => {
         playRound(computerChoice, rpsPlayerSelection(e));
@@ -102,13 +101,28 @@ function playRound(computer, player) {
     RPSLogic(computer, player);
     // Game end check
     if (computerScore != 5 && playerScore != 5) {
-        // Add hover and click events back to page after CPU Selection.
+        // Add hover, click events, and default rps button styling back to page after CPU Selection.
         setTimeout(() => {
+            let defaultBoxShadow = '0px 5px 4px -1px #adaca8';
+            let defaultRpsButtonBgColor = '#BFBFBF';
             playerButtons.forEach((element) => element.addEventListener('click', getPlayerChoice));
             rpsButtons.forEach((element) => element.addEventListener('mouseenter', defaultHoverMessageBar));
             rpsButtons.forEach((element) => element.addEventListener('mouseleave', defaultLeaveHoverMessageBar));
             gameContainer.style.cursor = 'default';
-        }, oneSecond * 0.15);
+
+            const playerPick = document.querySelector(`#player-${player}`);
+            playerPick.classList.remove('rps-lose');
+            playerPick.classList.remove('player-win-glow');
+            playerPick.classList.remove('player-win-color');
+            playerButtons.forEach((element) => element.classList.add('hover'));
+
+            const computerPick = document.querySelector(`#cpu-${computer}`);
+            computerPick.classList.remove('rps-lose');
+            computerPick.classList.remove('cpu-win-glow'); 
+            computerPick.classList.remove('cpu-win-color'); 
+
+
+        }, oneSecond * 0.9);
         return
     } else {
         gameEndDisplay();
@@ -141,6 +155,29 @@ function playRound(computer, player) {
     }
 }
 
+function gameRoundDisplay(computerChoice, playerChoice, roundWinMessage) {
+    const playerPick = document.querySelector(`#player-${playerChoice}`);
+    const computerPick = document.querySelector(`#cpu-${computerChoice}`);
+    playerButtons.forEach((element) => element.classList.remove('hover'));
+    if (roundWinMessage == 'You won!') {
+        playerPick.classList.add('player-win-glow');
+        playerPick.classList.add('player-win-color');
+        computerPick.classList.add('rps-lose');
+    }
+    else if (roundWinMessage == 'CPU won!') {
+        computerPick.classList.add('cpu-win-glow');    
+        computerPick.classList.add('cpu-win-color');
+        playerPick.classList.add('rps-lose');
+    }
+    else {
+        playerPick.classList.add('rps-lose');
+        playerPick.classList.add('player-win-glow');
+        computerPick.classList.add('rps-lose');
+        computerPick.classList.add('cpu-win-glow'); 
+    }
+}
+
+
 const cpuScore = document.querySelector('.round-cpu-score');
 const playerScoreBox = document.querySelector('.round-player-score');
 const gameHistory = document.querySelector('#history-log');
@@ -163,16 +200,20 @@ function RPSLogic(computer, player) {
             const visualComputerScore = document.querySelector(`.cpu-score-${computerScore}`);
             visualComputerScore.style.backgroundColor = '#FF7575'
             cpuScore.textContent = (`CPU Score: ${computerScore}`)
-            
+
             winMessage = 'CPU won!'
+            gameRoundDisplay(computer, player, winMessage);
         } else if (computerOutput < playerOutput) {
             playerScore++
             const visualPlayerScore = document.querySelector(`.player-score-${playerScore}`);
             visualPlayerScore.style.backgroundColor = '#8181FF'
             playerScoreBox.textContent = (`Score: ${playerScore}`)
+
             winMessage = 'You won!'
+            gameRoundDisplay(computer, player, winMessage);
         } else {
             winMessage = 'It\'s a tie'
+            gameRoundDisplay(computer, player, winMessage);
         }
 
         const logRoundHeader = document.querySelector('.history-header-round');
