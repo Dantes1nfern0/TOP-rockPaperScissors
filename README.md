@@ -1,3 +1,5 @@
-Feb 27, 2025
+Last Updated: Apr 3, 2025
 
-Mini 'Rock Paper Scissors' project from The Odin Project using only JavaScript
+Live preview: https://dantes1nfern0.github.io/TOP-rockPaperScissors/
+
+A 'Rock Paper Scissors' project from The Odin Project
