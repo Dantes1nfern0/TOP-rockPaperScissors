@@ -1,4 +1,3 @@
-
 const oneSecond = 1000
 let roundNumber = 1;
 let playerScore = 0;
@@ -25,12 +24,14 @@ function rpsPlayerSelection(e) {
 }
 
 const gameContainer = document.querySelector('.game-container')
-const rpsButtons = document.querySelectorAll('.rps-button');
 const messageBarDefault = document.querySelector('.message-bar-default');
+
+const rpsButtons = document.querySelectorAll('.rps-button');
 rpsButtons.forEach((element) => element.addEventListener('mouseleave', defaultLeaveHoverMessageBar));
 function defaultLeaveHoverMessageBar(e) {
     messageBarDefault.textContent = ('Make a selection...');
 }
+
 rpsButtons.forEach((element) => element.addEventListener('mouseenter', defaultHoverMessageBar));
 function defaultHoverMessageBar(e) {
     if (e.target.classList.contains('cpu')) {
@@ -70,26 +71,18 @@ function getPlayerChoice(e) {
 }
 
 function gameEndDisplay() {
-    let redGlow = '0px 0px 10px 2px #FF7575';
-    let blueGlow = '0px 0px 10px 2px #8181FF';
-    let red = '#FF7575';
-    let blue = '#8181FF';
-    let darkGrey = '#787878';
     const computerCircles = document.querySelectorAll('#cpu-score .circle');
     const computerRpsButtons = document.querySelectorAll('.cpu');
     const playerCircles = document.querySelectorAll('#player-score .circle');
     const playerRpsButtons = document.querySelectorAll('.player');
     if (computerScore == 5) {
-        computerCircles.forEach((element) => element.style.boxShadow = redGlow);
-        computerRpsButtons.forEach((element) => element.style.boxShadow = redGlow);
-        computerRpsButtons.forEach((element) => element.style.backgroundColor = red);
-        playerRpsButtons.forEach((element) => element.style.backgroundColor = darkGrey)
-    }
-    else if (playerScore == 5) {
-        playerCircles.forEach((element) => element.style.boxShadow = blueGlow);
-        playerRpsButtons.forEach((element) => element.style.boxShadow = blueGlow);
-        playerRpsButtons.forEach((element) => element.style.backgroundColor = blue);
-        computerRpsButtons.forEach((element) => element.style.backgroundColor = darkGrey);
+        computerCircles.forEach((element) => element.classList.add('cpu-win-glow'));
+        computerRpsButtons.forEach((element) => element.classList.add('cpu-win-glow', 'cpu-win-color'));
+        playerRpsButtons.forEach((element) => element.classList.add('rps-lose'));
+    } else if (playerScore == 5) {
+        playerCircles.forEach((element) => element.classList.add('player-win-glow'));
+        playerRpsButtons.forEach((element) => element.classList.add('player-win-glow', 'player-win-color'));
+        computerRpsButtons.forEach((element) => element.classList.add('rps-lose'));
     }
 }
 
@@ -111,17 +104,11 @@ function playRound(computer, player) {
             gameContainer.style.cursor = 'default';
 
             const playerPick = document.querySelector(`#player-${player}`);
-            playerPick.classList.remove('rps-lose');
-            playerPick.classList.remove('player-win-glow');
-            playerPick.classList.remove('player-win-color');
+            playerPick.classList.remove('rps-lose', 'player-win-glow', 'player-win-color');
             playerButtons.forEach((element) => element.classList.add('hover'));
 
             const computerPick = document.querySelector(`#cpu-${computer}`);
-            computerPick.classList.remove('rps-lose');
-            computerPick.classList.remove('cpu-win-glow'); 
-            computerPick.classList.remove('cpu-win-color'); 
-
-
+            computerPick.classList.remove('rps-lose', 'cpu-win-glow', 'cpu-win-color');
         }, oneSecond * 0.9);
         return
     } else {
@@ -160,20 +147,16 @@ function gameRoundDisplay(computerChoice, playerChoice, roundWinMessage) {
     const computerPick = document.querySelector(`#cpu-${computerChoice}`);
     playerButtons.forEach((element) => element.classList.remove('hover'));
     if (roundWinMessage == 'You won!') {
-        playerPick.classList.add('player-win-glow');
-        playerPick.classList.add('player-win-color');
+        playerPick.classList.add('player-win-glow', 'player-win-color');
         computerPick.classList.add('rps-lose');
     }
     else if (roundWinMessage == 'CPU won!') {
-        computerPick.classList.add('cpu-win-glow');    
-        computerPick.classList.add('cpu-win-color');
+        computerPick.classList.add('cpu-win-glow', 'cpu-win-color');    
         playerPick.classList.add('rps-lose');
     }
     else {
-        playerPick.classList.add('rps-lose');
-        playerPick.classList.add('player-win-glow');
-        computerPick.classList.add('rps-lose');
-        computerPick.classList.add('cpu-win-glow'); 
+        playerPick.classList.add('rps-lose', 'player-win-glow');
+        computerPick.classList.add('rps-lose', 'cpu-win-glow');
     }
 }
 
@@ -223,7 +206,6 @@ function RPSLogic(computer, player) {
             // round number
             const logRoundNode = document.createElement('li');
             const logRoundText = document.createTextNode(`${roundNumber - 1}`);
-        
             logRoundNode.appendChild(logRoundText);
             logRoundHeader.after(logRoundNode);
             // cpu choice
@@ -241,5 +223,3 @@ function RPSLogic(computer, player) {
         gameLogListContent();
     }
 }
-
-
