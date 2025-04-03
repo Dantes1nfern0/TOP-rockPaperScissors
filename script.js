@@ -45,7 +45,10 @@ const playerButtons = document.querySelectorAll('.player');
 playerButtons.forEach((element) => element.addEventListener('click', getPlayerChoice));
 function getPlayerChoice(e) {
     computerChoice = getComputerChoice();
+    buttonSound()
     
+    playerButtons.forEach((element) => element.removeEventListener('click', getPlayerChoice));
+
     messageBarDefault.textContent = (`You chose: ${rpsPlayerSelection(e)} | CPU chose: `);
     const loadingSpan = document.createElement('span');
     loadingSpan.classList.add('load');
@@ -68,6 +71,11 @@ function getPlayerChoice(e) {
         playRound(computerChoice, rpsPlayerSelection(e));
         messageBarDefault.textContent = (`You chose: ${rpsPlayerSelection(e)} | CPU chose: ${computerChoice}`);
     }, oneSecond * 0.75);
+}
+
+function buttonSound() {
+    let audio = new Audio('bong_001.ogg');
+    audio.play();
 }
 
 function gameEndDisplay() {
