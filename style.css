@@ -125,6 +125,14 @@ i::before {
     cursor: pointer;
 }
 
+.cpu {
+    border: 2px solid #FF7575;
+}
+
+.player {
+    border: 2px solid #8181FF;
+}
+
 .rps-button.player:hover {
     background-color: #F3F3F3;
 }
@@ -154,6 +162,7 @@ i::before {
     font-size: 22px;
     border: none;
     display: none;
+    cursor: pointer;
 }
 
 .play-again-button:hover {
